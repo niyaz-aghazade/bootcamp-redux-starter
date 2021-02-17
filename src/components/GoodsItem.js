@@ -1,8 +1,21 @@
 import React, { Component } from "react";
+
 import "../styles.css";
 
+import store from '../redux/store';
 
 class GoodsItem extends Component {
+  handleClick = (id) => {
+    const action = {
+      type: 'ADD_GOOD_TO_CART',
+      payload: {
+        id
+      }
+    }
+
+    store.dispatch(action);
+  }
+
   render() {
     const { title, description, price, id } = this.props;
 
@@ -14,7 +27,11 @@ class GoodsItem extends Component {
           <span className="goods-item__price-value goods-item__price-value_new">{price}.00$</span>
         </p>
         <p className="goods-item__description">{description}</p>
-        <button className="goods-item__add-to-card">Add to cart</button>
+        <button
+          onClick={() => this.handleClick(id)}
+          className="goods-item__add-to-card">
+            Add to cart
+        </button>
       </div>
     );
   }

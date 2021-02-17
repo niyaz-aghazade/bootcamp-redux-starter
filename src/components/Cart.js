@@ -2,15 +2,28 @@ import React, { Component } from "react";
 import "../styles.css";
 
 import CartItem from './CartItem';
+import store from '../redux/store';
+import { throwStatement } from "@babel/types";
 
-class Cart extends Component {
+class Cart extends React.PureComponent {
   state = {
     cartGoods: []
   }
+
+  componentDidMount() {
+    store.subscribe(() => {
+      const cart = store.getState().cart;
+      this.setState({
+        cartGoods: cart
+      });
+    })
+  }
+
   getTotal() {
     const { cartGoods } = this.state;
     return cartGoods.reduce((acc, item) => acc + item.price, 0);
   }
+
   render() {
     return (
       <div className="cart">
@@ -26,7 +39,7 @@ class Cart extends Component {
         :
           <p className="cart__note">Nothing in the cart now</p>
         }
-        
+
         <p className="cart__total">Total: {this.getTotal()}.00$</p>
       </div>
     );
