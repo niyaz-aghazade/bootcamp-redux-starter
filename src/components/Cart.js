@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { PurePureComponent } from "react";
 import "../styles.css";
 
 import CartItem from './CartItem';
 import store from '../redux/store';
-import { throwStatement } from "@babel/types";
 
-class Cart extends React.PureComponent {
+class Cart extends PurePureComponent {
   state = {
     cartGoods: []
   }

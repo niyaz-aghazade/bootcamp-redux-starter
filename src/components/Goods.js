@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import "../styles.css";
 
 import GoodsItem from './GoodsItem';
 import store from '../redux/store';
-class Goods extends Component {
+class Goods extends PureComponent {
   state = {
     goods: []
   }

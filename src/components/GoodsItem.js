@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import "../styles.css";
 
 import store from '../redux/store';
 
-class GoodsItem extends Component {
+class GoodsItem extends PureComponent {
   handleClick = (id) => {
     const action = {
       type: 'ADD_GOOD_TO_CART',
