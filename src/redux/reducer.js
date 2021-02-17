@@ -35,7 +35,7 @@ function reducer(state = initialState, action) {
 			...state,
 			cart: [
 				...state.cart,
-				good
+				{...good}
 			]
 		}
 	}

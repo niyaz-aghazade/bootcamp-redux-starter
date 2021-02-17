@@ -1,23 +1,13 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import "../styles.css";
 
-import store from '../redux/store';
+import {connect} from 'react-redux';
+import {addGoodToCart} from '../redux/actions';
 
-class GoodsItem extends Component {
-  handleClick = (id) => {
-    const action = {
-      type: 'ADD_GOOD_TO_CART',
-      payload: {
-        id
-      }
-    }
-
-    store.dispatch(action);
-  }
-
+class GoodsItem extends PureComponent {
   render() {
-    const { title, description, price, id } = this.props;
+    const { title, description, price, id, addGoodToCart } = this.props;
 
     return (
       <div className="goods-item" key={id}>
@@ -28,7 +18,7 @@ class GoodsItem extends Component {
         </p>
         <p className="goods-item__description">{description}</p>
         <button
-          onClick={() => this.handleClick(id)}
+          onClick={() => addGoodToCart(id)}
           className="goods-item__add-to-card">
             Add to cart
         </button>
@@ -37,4 +27,16 @@ class GoodsItem extends Component {
   }
 }
 
-export default GoodsItem;
+// запись в виде функции
+// const mapDispatchToProps = (dispatch) => ({
+//   addGoodToCart: (id) => {
+//     dispatch(addGoodToCartAction(id));
+//   }
+// });
+
+// запись в виде объекта
+const mapDispatchToProps = {
+  addGoodToCart
+}
+
+export default connect(null, mapDispatchToProps)(GoodsItem);
